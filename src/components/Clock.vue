@@ -27,5 +27,6 @@ export default defineComponent({
 <style scoped lang="scss">
   .time {
     font-size: 3rem;
+    font-weight: 500;
   }
 </style>
