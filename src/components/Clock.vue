@@ -3,14 +3,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from '@vue/runtime-core'
 
 export default defineComponent({
-  name: "Clock",
+  name: 'Clock',
   data() {
     return {
       interval: 0,
-      time: new Date().toLocaleTimeString()
+      time: new Date().toLocaleTimeString(),
     }
   },
   mounted() {
@@ -20,13 +20,13 @@ export default defineComponent({
   },
   beforeUnmount() {
     clearInterval(this.interval)
-  }
-});
+  },
+})
 </script>
 
 <style scoped lang="scss">
-  .time {
-    font-size: 3rem;
-    font-weight: 500;
-  }
+.time {
+  font-size: 3rem;
+  font-weight: 500;
+}
 </style>

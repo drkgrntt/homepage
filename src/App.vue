@@ -1,10 +1,40 @@
 <template>
-  <!-- <div id="nav">
+  <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
-  <router-view />
+    <router-link v-if="!user" to="/auth">Login</router-link>
+    <a @click="logout" v-if="user">Logout</a>
+  </div>
+  <router-view :user="user" />
 </template>
+
+<script lang="ts">
+import { defineComponent } from '@vue/runtime-core'
+import {
+  getAuth,
+  onAuthStateChanged,
+  User,
+  signOut,
+} from 'firebase/auth'
+
+export default defineComponent({
+  data(): { user: User | null } {
+    return {
+      user: null,
+    }
+  },
+  created() {
+    onAuthStateChanged(getAuth(), (user) => {
+      this.user = user
+    })
+  },
+  methods: {
+    async logout() {
+      await signOut(getAuth())
+      this.user = null
+    },
+  },
+})
+</script>
 
 <style lang="scss">
 #app {
@@ -21,6 +51,8 @@
   a {
     font-weight: bold;
     color: #2c3e50;
+    text-decoration: underline;
+    cursor: pointer;
 
     &.router-link-exact-active {
       color: #42b983;

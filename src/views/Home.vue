@@ -1,17 +1,21 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <p v-if="user">Logged in as {{ user.email }}</p>
+    <Clock />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import Clock from '@/components/Clock.vue'
+import { defineComponent } from '@vue/runtime-core'
 
 export default defineComponent({
-  name: "Home",
+  name: 'Home',
   components: {
-    HelloWorld,
+    Clock,
   },
-});
+  props: {
+    user: Object,
+  },
+})
 </script>
